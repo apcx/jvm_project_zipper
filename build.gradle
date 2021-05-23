@@ -1,0 +1,10 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.0'
+    id 'application'
+}
+
+group = 'apc.zip'
+version = '1.0-SNAPSHOT'
+
+repositories { mavenCentral() }
+application { mainClassName = 'MainKt' }

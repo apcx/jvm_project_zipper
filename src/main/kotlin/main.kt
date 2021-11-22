@@ -12,7 +12,11 @@ fun zip(path: String, include_git: Boolean = false) {
     val directories = mutableListOf<File>()
     ZipOutputStream(File(root.parent, "${root.name}.zip").outputStream().buffered()).use { zip ->
         root.walk().onEnter {
-            val add = if (it.name == ".git") include_git else !it.ignored()
+            val add = when (it.name) {
+                "build" -> false
+                ".git" -> include_git
+                else -> !it.ignored()
+            }
             if (add) directories += it
             add
         }.onLeave { directories -= it }.forEach { file ->
